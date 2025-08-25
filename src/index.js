@@ -1,19 +1,31 @@
-const express = require('express')
-const app = express()
-const port = 3000
+// require('dotenv').config( {path: './env'} ) // this syntax breaks consistency but it is  
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
+import  dotenv  from "dotenv" 
+import connectDB from "./db/index.js"
+
+dotenv.config({
+    path: './env'
 })
 
-app.get('/twitter', (req, res) => {
-    res.send("<h1>Twitter Home Page</h1>")
-})
+connectDB()
 
-app.get('/login', (req, res) => {
-    res.send("<h1>Login Page</h1>")
-})
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+// Approach 1 
+/*  
+;( async () => {
+    try {
+        await mongoose.connect(`${process.env.MONGODB_URI}/${DB_NAME}`)
+        app.on("error",(error) => {
+            console.log("ERRR: ",err)
+        })
+
+        app.listen(process.env.PORT,() => {
+            console.log(`App is listening on Port: ${process.env.PORT}`);
+        })
+        
+    } catch (error) {
+        console.error("ERROR: ",error)
+        throw error
+    }
+})() 
+*/
